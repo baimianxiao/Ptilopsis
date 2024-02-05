@@ -1,9 +1,10 @@
 # -*- encoding:utf-8 -*-
+import os,sys
 import json
-from GuDice import Classify, API, Event
-
+from GuDice import Classify, API, Event, PluginManager
 from flask import Flask, request
 from gevent import pywsgi
+import plugin
 
 app = Flask(__name__)
 
@@ -35,4 +36,11 @@ def server_start(mode="", host="127.0.0.1", port=5900):
 
 
 if __name__ == "__main__":
-    server_start()
+    print(sys.path)
+    print(r'D:\project\GuDice' in sys.path)
+    """plugin.test.test()
+    Manager = PluginManager()
+    Manager.test2()
+    Plugin = Manager.test 
+    Plugin.test()
+    server_start()"""
