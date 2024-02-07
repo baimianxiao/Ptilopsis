@@ -8,11 +8,11 @@ class Event:
     def group_message(self, event, bot):
         pass
 
-    def main(self, data, bot):
-        if data[1] == "private_message":
-            self.private_message(data, bot)
-        elif data[1] == "group_message":
-            self.group_message(data, bot)
+    def main(self, event, bot):
+        if event['type'] == "private_message":
+            self.private_message(event['data'], bot)
+        elif event['type'] == "group_message":
+            self.group_message(event['data'], bot)
 
 
 class MessageData:
