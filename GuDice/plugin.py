@@ -27,9 +27,9 @@ class PluginManager:
                 else:
                     print(item.name + "缺失文件")
 
-    def plugin_event(self, data, bot):
+    def plugin_event(self, event, bot):
         for plugin_object in self.plugin_list:
-            plugin_object.main.PluginEvent().main(data, bot)
+            plugin_object.main.PluginEvent().main(event, bot)
 
     def plugin_test(self):
         pass
