@@ -74,5 +74,10 @@ class Classify:
         pass
 
     def result(self):
-        print([self.bot_id, self.type, self.data])
-        return [self.bot_id, self.type, self.data]
+        result = {
+            "bot_id": self.bot_id,
+            "type": self.type,
+            "data": self.data
+        }
+        print(result)
+        return result
