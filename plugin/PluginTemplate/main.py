@@ -1,2 +1,8 @@
 # -*- encoding:utf-8 -*-
-print("main")
+from GuDice import Event
+
+
+class PluginEvent(Event):
+    def private_message(self, data, bot):
+        if data[2].message == "咕":
+            bot.send_private_msg(2432115441,"咕")

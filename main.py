@@ -1,23 +1,21 @@
 # -*- encoding:utf-8 -*-
-import os,sys
+import os, sys
 import json
 from GuDice import Classify, API, Event, PluginManager
 from flask import Flask, request
 from gevent import pywsgi
-import plugin
 
 app = Flask(__name__)
 
 
 # 根目录
 @app.route('/', methods=['POST', 'GET'])
-def arknights_draw():
-    student = request.data.decode('utf-8')
-    # 获取到POST过来的数据，因为我这里传过来的数据需要转换一下编码。根据晶具体情况而定
-    student_json = json.loads(student)
+def bot():
+    data = request.data.decode('utf-8')
+    data_json = json.loads(data)
     # 把区获取到的数据转为JSON格式。
-    data = Classify(student_json).result()
-    Event(data)
+    data = Classify(data_json).result()
+    Manager.plugin_event(data,bot)
     return {"status": "ok", "retcode": 0}
 
 
@@ -28,7 +26,7 @@ def server_start(mode="", host="127.0.0.1", port=5900):
     else:
         try:
             server = pywsgi.WSGIServer((host, port), app)
-            print("图片服务器已启动：http://" + host + ":" + str(port))
+            print("post服务器已启动：http://" + host + ":" + str(port))
             server.serve_forever()
         except OSError:
             print("端口被占用，请修改端口")
@@ -36,11 +34,7 @@ def server_start(mode="", host="127.0.0.1", port=5900):
 
 
 if __name__ == "__main__":
-    print(sys.path)
-    print(r'D:\project\GuDice' in sys.path)
-    """plugin.test.test()
     Manager = PluginManager()
-    Manager.test2()
-    Plugin = Manager.test 
-    Plugin.test()
-    server_start()"""
+    Manager.plugin_registered()
+    bot=API("127.0.0.1",5700)
+    server_start()
