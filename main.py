@@ -14,8 +14,8 @@ def bot():
     data = request.data.decode('utf-8')
     data_json = json.loads(data)
     # 把区获取到的数据转为JSON格式。
-    data = Classify(data_json).result()
-    Manager.plugin_event(data,bot)
+    event = Classify(data_json).result()
+    Manager.plugin_event(event,bot)
     return {"status": "ok", "retcode": 0}
 
 
