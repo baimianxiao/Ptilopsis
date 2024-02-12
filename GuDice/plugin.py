@@ -3,6 +3,7 @@ import os
 import sys
 import importlib
 from os.path import abspath, join, exists, dirname
+from GuDice import Event, API
 
 file_dir = dirname(abspath(__file__))
 
@@ -33,6 +34,18 @@ class PluginManager:
 
     def plugin_test(self):
         pass
+
+
+# 插件基类
+class Plugin(Event):
+    def init(self):
+        pass
+
+    def main(self, event, bot):
+        if event['type'] == "private_message":
+            self.private_message(event['data'], bot)
+        elif event['type'] == "group_message":
+            self.group_message(event['data'], bot)
 
 
 if __name__ == "__main__":

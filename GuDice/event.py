@@ -1,18 +1,11 @@
 # -*- encoding:utf-8 -*-
 
 class Event:
-
-    def private_message(self, event, bot):
+    def private_message(self, data, bot):
         pass
 
-    def group_message(self, event, bot):
+    def group_message(self, data, bot):
         pass
-
-    def main(self, event, bot):
-        if event['type'] == "private_message":
-            self.private_message(event['data'], bot)
-        elif event['type'] == "group_message":
-            self.group_message(event['data'], bot)
 
 
 class MessageData:
