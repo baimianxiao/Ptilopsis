@@ -15,8 +15,8 @@ def bot():
     data_json = json.loads(data)
     # 把区获取到的数据转为JSON格式。
     event = Classify(data_json).result()
-    Manager.plugin_event(event,bot)
-    return {"status": "ok", "retcode": 0}
+    result=Manager.plugin_event(event, bot)
+    return result
 
 
 def server_start(mode="", host="127.0.0.1", port=5900):
@@ -36,5 +36,5 @@ def server_start(mode="", host="127.0.0.1", port=5900):
 if __name__ == "__main__":
     Manager = PluginManager()
     Manager.plugin_registered()
-    bot=API("127.0.0.1",5700)
+    bot = API("127.0.0.1", 5700)
     server_start()

@@ -5,7 +5,7 @@ import requests
 
 
 class API:
-    """go_cqhttp主动Api"""
+    """主动Api"""
 
     def __init__(self, host: str, port: int):
         self.headers = {'Content-Type': 'application/json'}
