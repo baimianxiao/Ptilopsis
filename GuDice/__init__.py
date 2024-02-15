@@ -9,6 +9,7 @@ from GuDice.plugin import PluginManager, Plugin
 
 __all__ = [
     "API",
+    "Bot",
     "Classify",
     "Dice",
     "Event",
