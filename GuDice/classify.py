@@ -23,12 +23,13 @@ class Classify:
         elif data['post_type'] == "notice":
             if data['notice_type'] == "notify":
                 if data['sub_type'] == "poke":
-                    if 'group_id' in data:
-                        self.group_poke()
-                        self.type = "group_poke"
-                    else:
-                        self.private_poke()
-                        self.type = "private_poke"
+                    if data['target_id'] == data['self_id']:
+                        if 'group_id' in data:
+                            self.group_poke()
+                            self.type = "group_poke"
+                        else:
+                            self.private_poke()
+                            self.type = "private_poke"
                 elif data['sub_type'] == "sign":
                     self.type = "group_sign"
 
@@ -65,12 +66,17 @@ class Classify:
         data.type = self.data["message"][0]["type"]
         data.message = self.data["raw_message"]
         self.data = data
-        print("群聊消息 QQ：{} 群昵称：{} 内容：{}".format(data.user_id, data.user_nick, data.message))
+        print("群聊消息 群号：{} QQ：{} 内容：{}".format(data.group_id, data.user_id, data.message))
 
     def private_poke(self):
         pass
 
     def group_poke(self):
+        data = NoticeData()
+        data.user_id = self.data["user_id"]
+        data.group_id = self.data["group_id"]
+        self.data = data
+        print("群戳一戳消息 群号：{} QQ：{} ".format(data.group_id, data.user_id))
         pass
 
     def result(self):
@@ -79,5 +85,5 @@ class Classify:
             "type": self.type,
             "data": self.data
         }
-        print(result)
+        # print(result)
         return result

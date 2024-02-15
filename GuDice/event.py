@@ -7,6 +7,12 @@ class Event:
     def group_message(self, data, bot):
         pass
 
+    def private_poke(self, data, bot):
+        pass
+
+    def group_poke(self, data, bot):
+        pass
+
 
 class MessageData:
     user_id: int
