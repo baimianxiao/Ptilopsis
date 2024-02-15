@@ -29,8 +29,10 @@ class PluginManager:
                     print(item.name + "缺失文件")
 
     def plugin_event(self, event, bot):
+        plugin_result = {}
         for plugin_object in self.plugin_list:
-            plugin_object.main.PluginEvent().main(event, bot)
+            plugin_result = plugin_object.main.PluginEvent().main(event, bot)
+        return plugin_result
 
     def plugin_test(self):
         pass
@@ -39,13 +41,18 @@ class PluginManager:
 # 插件基类
 class Plugin(Event):
     def init(self):
+
         pass
 
     def main(self, event, bot):
+        self.bot = bot
         if event['type'] == "private_message":
-            self.private_message(event['data'], bot)
+            self.private_message(event['data'], self.bot)
         elif event['type'] == "group_message":
-            self.group_message(event['data'], bot)
+            self.group_message(event['data'], self.bot)
+        elif event['type'] == "group_poke":
+            self.group_poke(event['data'], self.bot)
+        return self.bot.result()
 
 
 if __name__ == "__main__":
