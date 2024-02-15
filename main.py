@@ -1,7 +1,7 @@
 # -*- encoding:utf-8 -*-
 import os, sys
 import json
-from GuDice import Classify, API, Event, PluginManager
+from GuDice import Bot,Classify, Event, PluginManager
 from flask import Flask, request
 from gevent import pywsgi
 
@@ -15,7 +15,7 @@ def bot():
     data_json = json.loads(data)
     # 把区获取到的数据转为JSON格式。
     event = Classify(data_json).result()
-    result=Manager.plugin_event(event, bot)
+    result = Manager.plugin_event(event, bot)
     return result
 
 
@@ -25,7 +25,7 @@ def server_start(mode="", host="127.0.0.1", port=5900):
         print("测试环境")
     else:
         try:
-            server = pywsgi.WSGIServer((host, port), app)
+            server = pywsgi.WSGIServer((host, port), app, log=None)
             print("post服务器已启动：http://" + host + ":" + str(port))
             server.serve_forever()
         except OSError:
@@ -34,7 +34,8 @@ def server_start(mode="", host="127.0.0.1", port=5900):
 
 
 if __name__ == "__main__":
+    print("version:0.0.2(2)")
     Manager = PluginManager()
     Manager.plugin_registered()
-    bot = API("127.0.0.1", 5700)
+    bot = Bot("127.0.0.1", 5700)
     server_start()
