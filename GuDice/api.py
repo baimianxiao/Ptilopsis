@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import json
+
 import requests
 
 
@@ -11,14 +12,14 @@ class API:
         self.headers = {'Content-Type': 'application/json'}
         self.url = "http://" + host + ":"+str(port) + "/"
 
-    def send_private_msg(self, user_id, message, auto_escape=True):
+    def send_private_msg(self, user_id, message, auto_escape=False):
         """发送私聊消息"""
         post_road = "send_private_msg"
         data = json.dumps({"user_id": user_id, "message": message, "auto_escape": auto_escape})
         return_message = requests.post(self.url + post_road, data=data, headers=self.headers)
         return return_message.text
 
-    def send_group_msg(self, group_id, message, auto_escape=True):
+    def send_group_msg(self, group_id, message, auto_escape=False):
         """发送群消息"""
         post_road = "send_group_msg"
         data = json.dumps(

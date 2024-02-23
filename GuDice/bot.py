@@ -1,6 +1,5 @@
 # -*- encoding:utf-8 -*-
 from GuDice import API
-import sqlite3
 
 
 class Bot(API):
@@ -12,7 +11,7 @@ class Bot(API):
     def reply(self, message):
         self.bot_result = {
             "reply": message,
-            "auto_escape": True,
+            "auto_escape": False,
             "auto_reply": False
         }
 
