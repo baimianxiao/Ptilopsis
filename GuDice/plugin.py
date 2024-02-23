@@ -1,15 +1,17 @@
 # -*- encoding:utf-8 -*-
-import os
+from os import getcwd, scandir
 import sys
 import importlib
 from os.path import abspath, join, exists, dirname
 from GuDice import Event, API
 
-file_dir = dirname(abspath(__file__))
+import sqlite3
+import onedice
 
 
 class PluginManager:
-    plugin_dir = abspath(join(file_dir, '../plugin'))
+    main_dir = getcwd()
+    plugin_dir = join(main_dir, 'plugin')
     plugin_list = []
 
     def __init__(self):
@@ -19,7 +21,7 @@ class PluginManager:
         self.test = None
 
     def plugin_registered(self):
-        for item in os.scandir(self.plugin_dir):
+        for item in scandir(self.plugin_dir):
             if item.is_dir():
                 if (exists(join(self.plugin_dir, item.name, "config.toml"))
                         and exists(join(self.plugin_dir, item.name, "main.py"))):
@@ -40,6 +42,9 @@ class PluginManager:
 
 # 插件基类
 class Plugin(Event):
+    def __init__(self):
+        self.bot = None
+
     def init(self):
 
         pass
