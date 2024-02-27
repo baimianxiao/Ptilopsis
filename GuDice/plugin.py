@@ -5,6 +5,7 @@ import importlib
 from os.path import abspath, join, exists, dirname
 from GuDice import Event, API
 
+# 常用库导入
 import sqlite3
 import onedice
 
@@ -26,6 +27,8 @@ class PluginManager:
                 if (exists(join(self.plugin_dir, item.name, "config.toml"))
                         and exists(join(self.plugin_dir, item.name, "main.py"))):
                     plugin_object = importlib.import_module(item.name)
+                    plugin_object = plugin_object.main.PluginEvent()
+                    plugin_object.init()
                     self.plugin_list.append(plugin_object)
                 else:
                     print(item.name + "缺失文件")
@@ -33,8 +36,11 @@ class PluginManager:
     def plugin_event(self, event, bot):
         plugin_result = {}
         for plugin_object in self.plugin_list:
-            plugin_result = plugin_object.main.PluginEvent().main(event, bot)
+            plugin_result = plugin_object.main(event, bot)
         return plugin_result
+
+    def plugin_hot_reload(self):
+        pass
 
     def plugin_test(self):
         pass
@@ -46,7 +52,6 @@ class Plugin(Event):
         self.bot = None
 
     def init(self):
-
         pass
 
     def main(self, event, bot):
