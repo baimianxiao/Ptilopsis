@@ -5,6 +5,7 @@ from GuDice.bot import Bot
 from GuDice.classify import Classify
 from GuDice.event import Event
 from GuDice.plugin import PluginManager, Plugin
+from GuDice.util import *
 
 __all__ = [
     "API",
@@ -12,5 +13,6 @@ __all__ = [
     "Classify",
     "Event",
     "PluginManager",
-    "Plugin"
+    "Plugin",
+    "util"
 ]
