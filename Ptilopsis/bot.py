@@ -1,5 +1,5 @@
 # -*- encoding:utf-8 -*-
-from GuDice import API
+from Ptilopsis import API
 
 
 class Bot(API):

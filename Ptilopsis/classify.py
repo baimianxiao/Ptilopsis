@@ -1,6 +1,6 @@
 # -*- encoding:utf-8 -*-
 
-from GuDice.event import Event, MessageData, NoticeData
+from Ptilopsis.event import Event, MessageData, NoticeData
 
 
 class Classify:

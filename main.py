@@ -4,7 +4,7 @@ import os, sys
 import json
 from os.path import join
 
-from GuDice import Bot, Classify, Event, PluginManager
+from Ptilopsis import Bot, Classify, Event, PluginManager
 from flask import Flask, request, Response, make_response, send_file
 from gevent import pywsgi
 

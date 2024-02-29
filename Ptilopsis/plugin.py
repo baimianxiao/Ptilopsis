@@ -3,7 +3,7 @@ from os import getcwd, scandir
 import sys
 import importlib
 from os.path import abspath, join, exists, dirname
-from GuDice import Event, API
+from Ptilopsis import Event, API
 
 # 常用库导入
 import sqlite3

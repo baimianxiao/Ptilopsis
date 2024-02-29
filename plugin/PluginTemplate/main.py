@@ -1,5 +1,5 @@
 # -*- encoding:utf-8 -*-
-from GuDice import Plugin
+from Ptilopsis import Plugin
 
 
 class PluginEvent(Plugin):
