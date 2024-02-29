@@ -1,0 +1,17 @@
+[[source]]
+url = "http://pypi.tuna.tsinghua.edu.cn/simple"
+verify_ssl = false
+name = "pip_conf_index_global"
+
+[packages]
+requests = "*"
+onedice = "*"
+gevent = "*"
+flask = "*"
+toml = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"
+python_full_version = "3.10.7"
