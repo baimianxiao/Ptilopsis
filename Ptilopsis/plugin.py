@@ -31,13 +31,13 @@ class PluginManager:
                     plugin_object.init()
                     self.plugin_list.append(plugin_object)
                 else:
-                    log_output(item.name + "缺失文件","WARNING")
+                    log_output(item.name + "缺失文件", "WARNING")
 
     def plugin_event(self, event, bot):
-        plugin_result = {}
+        bot.event(event)
         for plugin_object in self.plugin_list:
-            plugin_result = plugin_object.main(event, bot)
-        return plugin_result
+            plugin_object.main(event, bot)
+        return {}
 
     def plugin_hot_reload(self):
         pass

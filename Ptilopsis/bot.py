@@ -7,6 +7,7 @@ class Bot(API):
 
     def __init__(self, host: str, port: int):
         super().__init__(host, port)
+        self.event = None
 
     def reply(self, message):
         self.bot_result = {
@@ -14,6 +15,9 @@ class Bot(API):
             "auto_escape": False,
             "auto_reply": False
         }
+
+    def event(self, event):
+        self.event = event
 
     def result(self):
         result = self.bot_result
