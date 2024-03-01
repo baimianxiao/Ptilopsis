@@ -4,7 +4,7 @@ import sys
 import importlib
 from os.path import abspath, join, exists, dirname
 from Ptilopsis import Event, API
-
+from Ptilopsis.util import log_output
 # 常用库导入
 import sqlite3
 import onedice
@@ -18,7 +18,7 @@ class PluginManager:
     def __init__(self):
         if self.plugin_dir not in sys.path:
             sys.path.append(self.plugin_dir)
-        print("插件管理器加载成功")
+        log_output("插件管理器加载成功")
         self.test = None
 
     def plugin_registered(self):
@@ -31,7 +31,7 @@ class PluginManager:
                     plugin_object.init()
                     self.plugin_list.append(plugin_object)
                 else:
-                    print(item.name + "缺失文件")
+                    log_output(item.name + "缺失文件","WARNING")
 
     def plugin_event(self, event, bot):
         plugin_result = {}

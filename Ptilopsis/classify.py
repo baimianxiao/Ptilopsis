@@ -1,7 +1,7 @@
 # -*- encoding:utf-8 -*-
 
 from Ptilopsis.event import Event, MessageData, NoticeData
-
+from Ptilopsis.util import log_output
 
 class Classify:
     type: str = None
@@ -9,7 +9,7 @@ class Classify:
     def __init__(self, data: dict):
         self.data = data
         self.bot_id = data["self_id"]
-        print(data)
+        # print(data)
 
         # 消息分类
         if data['post_type'] == "message":
@@ -55,7 +55,7 @@ class Classify:
         data.type = self.data["message"][0]["type"]
         data.message = self.data["raw_message"]
         self.data = data
-        print("私聊消息 QQ：{} 昵称：{} 内容：{}".format(data.user_id, data.user_nick, data.message))
+        log_output("私聊消息 QQ：{} 昵称：{} 内容：{}".format(data.user_id, data.user_nick, data.message))
 
     def group_message(self):
         data = MessageData()
@@ -66,7 +66,7 @@ class Classify:
         data.type = self.data["message"][0]["type"]
         data.message = self.data["raw_message"]
         self.data = data
-        print("群聊消息 群号：{} QQ：{} 内容：{}".format(data.group_id, data.user_id, data.message))
+        log_output("群聊消息 群号：{} QQ：{} 内容：{}".format(data.group_id, data.user_id, data.message))
 
     def private_poke(self):
         pass
@@ -76,7 +76,7 @@ class Classify:
         data.user_id = self.data["user_id"]
         data.group_id = self.data["group_id"]
         self.data = data
-        print("群戳一戳消息 群号：{} QQ：{} ".format(data.group_id, data.user_id))
+        log_output("群戳一戳消息 群号：{} QQ：{} ".format(data.group_id, data.user_id))
         pass
 
     def result(self):

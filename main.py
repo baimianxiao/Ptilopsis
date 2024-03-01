@@ -3,10 +3,13 @@ import ctypes
 import os, sys
 import json
 from os.path import join
+from gevent import monkey, pywsgi
+
+monkey.patch_all()  # 打上猴子补丁
 
 from Ptilopsis import Bot, Classify, Event, PluginManager
+from Ptilopsis.util import log_output
 from flask import Flask, request, Response, make_response, send_file
-from gevent import pywsgi
 
 app = Flask(__name__)
 
@@ -27,7 +30,7 @@ def bot():
 @app.route("/data/<path:imageId>", methods=['POST', 'GET'])
 def plugin_image(imageId):
     try:
-        response = make_response(send_file(join(main_dir,"data", imageId)))
+        response = make_response(send_file(join(main_dir, "data", imageId)))
         response.headers["Content-Type"] = "image/jpeg"
         return response
     except BaseException as error:
@@ -37,20 +40,20 @@ def plugin_image(imageId):
 def server_start(mode="", host="127.0.0.1", port=5900):
     if mode == "debug":
         app.run(debug=True)
-        print("测试环境")
+        log_output("测试环境")
     else:
         try:
             server = pywsgi.WSGIServer((host, port), app, log=None)
-            print("post服务器已启动：http://" + host + ":" + str(port))
+            log_output("post服务器已启动：http://" + host + ":" + str(port))
             server.serve_forever()
         except OSError:
-            print("端口被占用，请修改端口")
+            log_output("端口被占用，请修改端口", "WARNING")
             input("回车关闭")
 
 
 if __name__ == "__main__":
-    version = "version:0.0.6(6)"
-    print(version)
+    version = "version:0.0.7(7)"
+    log_output(version)
     ctypes.windll.kernel32.SetConsoleTitleW("Ptilopsis " + version)
     Manager = PluginManager()
     Manager.plugin_registered()
